@@ -1,0 +1,14 @@
+--- /Users/rholmdahl/projects/ell/.venv/lib/python3.12/site-packages/instructor/multimodal.py	2024-10-13 18:26:28
++++ /Users/rholmdahl/projects/ell/multimodal_modified.py	2024-10-13 18:26:11
+@@ -95,6 +95,11 @@
+                 raise NotImplementedError("Gemini is not supported yet")
+             else:
+                 converted_contents.append(content.to_openai())
++        elif isinstance(content, dict):
++            # could also check:
++            # content.get("type") == "text" and isinstance(content.get("text"), str) 
++            # this works for now but is less safe?
++            converted_contents.append(content)
+         else:
+             raise ValueError(f"Unsupported content type: {type(content)}")
+     return converted_contents
